@@ -1,0 +1,29 @@
+.tabContainer {
+  padding-top: 0.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1%;
+}
+
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 100%;
+  max-height: 2rem;
+  min-height: 1rem;
+  padding: 0 3px;
+  font-size: 0.8rem;
+  background-color: white;
+  border: 1px solid #9a9696;
+  color: black;
+  cursor: pointer;
+}
+
+.activeTab {
+  background-color: black;
+  color: white;
+}

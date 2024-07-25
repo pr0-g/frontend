@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+
+  background: #fff !important;
+
+  max-width: 76.8rem;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  border: 1px solid black;
+
+  padding-bottom: 80px;
+}
+
+.todayRecommendWrap {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.recentPopularWrap {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.fieldRankingWrap {
+  width: 100%;
+  margin-top: 2rem;
+}

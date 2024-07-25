@@ -1,0 +1,29 @@
+.todayRecommendContainer {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.items {
+  display: flex;
+  gap: 1rem;
+
+  margin-top: 1rem;
+  width: 100%;
+  overflow: auto;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 13%;
+  max-width: 12rem;
+  min-width: 5rem;
+  min-height: 7rem;
+
+  background-color: #e0e0e0;
+}

@@ -1,0 +1,42 @@
+.recentPopularContainer {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.viewAll {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.items {
+  display: flex;
+  gap: 1rem;
+
+  margin-top: 1rem;
+  width: 100%;
+  overflow: auto;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 20%;
+  min-width: 10rem;
+  height: 13rem;
+  min-height: 11rem;
+
+  background-color: #e0e0e0;
+}

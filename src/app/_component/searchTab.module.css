@@ -1,0 +1,27 @@
+.searchContainer {
+  width: 100%;
+  max-width: inherit;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.searchWrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.search {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  outline: none;
+}
+
+.search::placeholder {
+  color: #aaa;
+}
