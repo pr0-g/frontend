@@ -1,5 +1,6 @@
 import styles from "./login.module.css";
 import BackNav from "../_component/BackNav";
+import { GoogleSignIn } from "./_components/Google";
 
 export default function Login() {
   return (
@@ -10,7 +11,9 @@ export default function Login() {
           <h1 className={styles.title}>PROG</h1>
           <div className={styles.loginButton}>카카오로 시작하기</div>
           <div className={styles.loginButton}>네이버로 시작하기</div>
-          <div className={styles.loginButton}>구글로 시작하기</div>
+          <div className={styles.loginButton}>
+            <GoogleSignIn />
+          </div>
         </main>
       </div>
     </>
