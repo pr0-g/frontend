@@ -1,6 +1,6 @@
 import styles from "./nickname.module.css";
-import BackNav from "../../_component/BackNav";
 import NickNameContent from "./_component/NicknameContent";
+import BackNav from "@/app/(afterLogin)/_components/BackNav";
 
 export default function NickName() {
   return (

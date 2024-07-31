@@ -2,8 +2,8 @@
 
 import React from "react";
 import styles from "./interests.module.css";
-import BackNav from "../../_component/BackNav";
 import InterestContent from "./_component/InterestsSection";
+import BackNav from "@/app/(afterLogin)/_components/BackNav";
 
 const interests = [
   "Interest 1",

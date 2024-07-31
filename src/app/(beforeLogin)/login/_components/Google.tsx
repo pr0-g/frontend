@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { googleSignIn } from "@/app/actions/auth";
 import Image from "next/image";
 import styles from "./google.module.css";
+import { googleSignIn } from "../../actions/auth";
 
 export function GoogleSignIn() {
   return (
