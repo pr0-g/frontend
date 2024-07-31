@@ -3,7 +3,7 @@
 import React from "react";
 import styles from "./interests.module.css";
 import InterestContent from "./_component/InterestsSection";
-import BackNav from "@/app/(afterLogin)/_components/BackNav";
+import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 
 const interests = [
   "Interest 1",

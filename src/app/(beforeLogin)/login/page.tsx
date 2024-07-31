@@ -1,6 +1,6 @@
 import { GoogleSignIn } from "./_components/Google";
 import styles from "./login.module.css";
-import BackNav from "@/app/(afterLogin)/_components/BackNav";
+import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 
 export default function Login() {
   return (
