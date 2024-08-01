@@ -1,0 +1,23 @@
+.tabNav {
+  width: inherit;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.tabButton {
+  padding: 0.5rem 1rem;
+  width: 80px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.tabButton.active {
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}
