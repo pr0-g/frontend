@@ -1,14 +1,9 @@
-import styles from "./nickname.module.css";
-import NickNameContent from "./_component/NicknameContent";
-import BackNav from "@/app/(beforeLogin)/_components/BackNav";
+import NickNameMain from "@/app/_components/nickname/page";
 
 export default function NickName() {
   return (
     <>
-      <BackNav navbarTitle="닉네임" />
-      <div className={styles.container}>
-        <NickNameContent nextLink="/" />
-      </div>
+      <NickNameMain nextLink="/home" />
     </>
   );
 }
