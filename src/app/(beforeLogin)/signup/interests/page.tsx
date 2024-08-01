@@ -1,9 +1,4 @@
-"use client";
-
-import React from "react";
-import styles from "./interests.module.css";
-import InterestContent from "./_component/InterestsSection";
-import BackNav from "@/app/(beforeLogin)/_components/BackNav";
+import InterestsMain from "@/app/_components/interests/page";
 
 const interests = [
   "Interest 1",
@@ -15,16 +10,10 @@ const interests = [
   "Interest 7",
 ];
 
-export default function Interest() {
+export default function Interests() {
   return (
     <>
-      <BackNav navbarTitle="관심 분야" />
-      <div className={styles.container}>
-        <InterestContent
-          interestsList={interests}
-          nextLink="/signup/nickname"
-        />
-      </div>
+      <InterestsMain interestsList={interests} nextLink="/signup/nickname" />
     </>
   );
 }
