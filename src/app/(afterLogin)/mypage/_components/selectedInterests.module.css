@@ -1,0 +1,67 @@
+.selectedInterestsContainer {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  gap: 1rem;
+}
+
+.title {
+  width: auto;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.edit {
+  width: auto;
+  display: flex;
+  align-items: center;
+  color: #b2b1b1;
+}
+
+.itemsWrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  min-height: 2rem;
+}
+
+.items {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+  height: 1.5rem;
+  padding: 0 0.75rem;
+  background-color: #f0f0f0;
+  border-radius: 0.75rem;
+}
+
+.writerName {
+  font-size: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,85 @@
+.subscriptionsContainer {
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.header {
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 100%;
+  max-width: 230px;
+}
+
+.viewAll {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.itemsWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.items {
+  display: flex;
+  gap: 2%;
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.items::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 0 14%;
+  aspect-ratio: 1.2 / 1.4;
+  min-width: 3.5rem;
+  background-color: #e0e0e0;
+}
+
+.profileImageWrapper {
+  width: inherit;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  background-color: pink;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.writerName {
+  display: flex;
+  justify-content: center;
+  align-content: start;
+  font-size: 0.6rem;
+  padding-bottom: 0.4rem;
+}

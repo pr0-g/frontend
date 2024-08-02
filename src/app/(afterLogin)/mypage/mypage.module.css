@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
+  width: 100vw;
   justify-content: center;
   align-items: center;
 }
@@ -9,7 +10,7 @@
 .header {
   font-size: 2rem;
   font-weight: bold;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .main {
@@ -18,6 +19,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  gap: 3rem;
 
   width: 100%;
   max-width: 50rem;
@@ -26,12 +28,41 @@
 
   border: 1px solid black;
 
-  padding: 2rem;
+  padding: 5rem 2rem;
 }
 
-.loginSignup {
+.myInfo {
   width: 100%;
-  max-width: 50rem;
+}
+
+.nickname {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.edit {
+  color: #b2b1b1;
+}
+
+.interests {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.premium {
+  width: 100%;
+}
+
+.standard {
+  width: 100%;
+}
+
+.chatbot {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
+}
+
+.setting {
+  width: 100%;
 }
