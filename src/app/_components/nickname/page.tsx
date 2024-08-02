@@ -6,9 +6,10 @@ import { useRouter } from "next/navigation";
 
 interface Props {
   nextLink: string;
+  btn: string;
 }
 
-export default function NickNameMain({ nextLink }: Props) {
+export default function NickNameMain({ nextLink, btn }: Props) {
   const router = useRouter();
   const onclick = () => {
     router.push(`${nextLink}`);
@@ -28,7 +29,7 @@ export default function NickNameMain({ nextLink }: Props) {
             />
           </div>
           <div className={styles.registerButton} onClick={onclick}>
-            등록하기
+            {btn}
           </div>
         </main>
       </div>

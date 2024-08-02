@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 interface Props {
   interestsList: string[];
   nextLink: string;
+  btn: string;
 }
 
-export default function InterestsMain({ interestsList, nextLink }: Props) {
+export default function InterestsMain({ interestsList, nextLink, btn }: Props) {
   const router = useRouter();
 
   const onclick = () => {
@@ -33,7 +34,7 @@ export default function InterestsMain({ interestsList, nextLink }: Props) {
             </div>
           </div>
           <div className={styles.registerButton} onClick={onclick}>
-            등록하기
+            {btn}
           </div>
         </main>
       </div>

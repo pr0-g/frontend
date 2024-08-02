@@ -13,7 +13,7 @@ const interests = [
 export default function Interests() {
   return (
     <>
-      <InterestsMain interestsList={interests} nextLink="/signup/nickname" />
+      <InterestsMain interestsList={interests} nextLink="/signup/nickname" btn="등록하기" />
     </>
   );
 }

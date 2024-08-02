@@ -13,7 +13,11 @@ const interests = [
 export default function Interests() {
   return (
     <>
-      <InterestsMain interestsList={interests} nextLink="/signup/nickname" />
+      <InterestsMain
+        interestsList={interests}
+        btn="수정하기"
+        nextLink="/signup/nickname"
+      />
     </>
   );
 }
