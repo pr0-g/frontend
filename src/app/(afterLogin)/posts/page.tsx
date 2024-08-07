@@ -2,7 +2,7 @@ import SearchTab from "../_components/SearchTab";
 import UnderNavigation from "../_components/UnderNavigation";
 import Post from "./_component/Post";
 import TabNav from "./_component/TabNav";
-import styles from "./home.module.css";
+import styles from "./posts.module.css";
 
 const posts = [
   {
@@ -62,7 +62,7 @@ const posts = [
   },
 ];
 
-export default function Home() {
+export default function Posts() {
   return (
     <>
       <div className={styles.container}>
