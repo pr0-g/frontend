@@ -1,21 +1,43 @@
-import { GoogleSignIn } from "./_components/Google";
-import styles from "./login.module.css";
-import BackNav from "@/app/(beforeLogin)/_components/BackNav";
+"use client";
+
+import { signIn } from "next-auth/react";
+import styles from "./Login.module.css";
 
 export default function Login() {
+  const handleSignIn = (provider: string) => {
+    const authUrl = `http://localhost:8080/oauth2/authorization/${provider}`;
+    window.location.href = authUrl;
+  };
+
   return (
-    <>
-      <BackNav navbarTitle="로그인" />
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>PROG</h1>
-          <div className={styles.loginButton}>카카오로 시작하기</div>
-          <div className={styles.loginButton}>네이버로 시작하기</div>
-          <div className={styles.loginButton}>
-            <GoogleSignIn />
-          </div>
-        </main>
+    <div className={styles.container}>
+      <h1 className={styles.title}>PROG</h1>
+      <div className={styles.main}>
+        <div className={styles.providerButtons}>
+          <button
+            onClick={() => handleSignIn("kakao")}
+            className={`${styles.providerButton} ${styles.kakao}`}
+          >
+            Kakao
+          </button>
+          <button
+            onClick={() => handleSignIn("naver")}
+            className={`${styles.providerButton} ${styles.naver}`}
+          >
+            Naver
+          </button>
+          <button
+            onClick={() => handleSignIn("google")}
+            className={`${styles.providerButton} ${styles.google}`}
+          >
+            Google
+          </button>
+        </div>
+        <p className={styles.terms}>
+          로그인하면 회원가입으로 처리되며, 서비스 이용약관과 개인정보처리방침에
+          동의한 것으로 간주합니다.
+        </p>
       </div>
-    </>
+    </div>
   );
 }
