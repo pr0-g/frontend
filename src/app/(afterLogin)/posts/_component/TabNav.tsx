@@ -2,11 +2,22 @@
 
 import React, { useState } from "react";
 import styles from "./tabNav.module.css";
+import { useTabStore } from "@/store/tab";
 
-const tabs = ["트렌딩", "최신", "구독", "좋아요"];
+interface Tab {
+  label: string;
+  value: string;
+}
+
+const tabs: Tab[] = [
+  { label: "트렌딩", value: "trending" },
+  { label: "최신", value: "recent" },
+  { label: "구독", value: "subscribed" },
+  { label: "좋아요", value: "liked" },
+];
 
 export default function TabNav() {
-  const [activeTab, setActiveTab] = useState(0);
+  const { activeTab, setActiveTab } = useTabStore();
 
   return (
     <nav className={styles.tabNav}>
@@ -18,7 +29,7 @@ export default function TabNav() {
           }`}
           onClick={() => setActiveTab(index)}
         >
-          {tab}
+          {tab.label}
         </button>
       ))}
     </nav>

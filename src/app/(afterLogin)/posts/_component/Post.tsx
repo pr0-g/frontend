@@ -1,57 +1,61 @@
-import React from "react";
 import styles from "./Post.module.css";
 import Image from "next/image";
 
 interface PostProps {
-  contentImageUrl?: string;
+  id: number;
   title: string;
-  content: string;
-  date: string;
-  comment: number;
-  userImageUrl: string;
-  author: string;
-  likes: number;
+  thumbnailUrl: string;
+  createdAt: string;
+  likeCount: number;
+  content?: string;
+  author?: string;
+  commentCount?: number;
 }
 
 export default function Post({
-  contentImageUrl,
+  id,
   title,
-  content,
-  date,
-  comment,
-  userImageUrl,
-  author,
-  likes,
+  thumbnailUrl,
+  createdAt,
+  likeCount,
+  content = "",
+  author = "Unknown Author",
+  commentCount = 0,
 }: PostProps) {
   return (
     <div className={styles.post}>
-      {contentImageUrl === "/" && (
-        <div className={styles.imageWrap}>
-          <Image
-            src={contentImageUrl}
+      <div className={styles.imageWrap}>
+        {/*<Image
+            src={}
             alt={title}
             layout="fill"
             objectFit="cover"
-          />
-        </div>
-      )}
+          />*/}
+      </div>
       <div className={styles.contentWrap}>
         <h3 className={styles.title}>{title}</h3>
-        <div className={styles.content}>{content}</div>
+        {content && <div className={styles.content}>{content}</div>}
       </div>
       <div className={styles.postInfo}>
-        <div className={styles.date}>{date}</div>
-        <div className={styles.comment}>{comment}개의 댓글</div>
+        <div className={styles.date}>
+          {new Date(createdAt).toLocaleDateString()}
+        </div>
+        <div className={styles.comment}>{commentCount}개의 댓글</div>
       </div>
       <div className={styles.userWrap}>
         <div className={styles.userInfoAndLike}>
           <div className={styles.userInfo}>
             <div className={styles.userImageWrap}>
-              <Image src={userImageUrl} alt={author} width={40} height={40} />
+              <Image
+                src="/default-profile.png"
+                alt={author}
+                width={40}
+                height={40}
+              />
             </div>
             <p className={styles.author}>{author}</p>
           </div>
-          <div>♡ {likes}</div>
+          <div>♡ {likeCount}</div>
         </div>
       </div>
     </div>

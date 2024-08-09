@@ -1,68 +1,48 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
 import SearchTab from "../_components/SearchTab";
 import UnderNavigation from "../_components/UnderNavigation";
 import Post from "./_component/Post";
 import TabNav from "./_component/TabNav";
 import styles from "./posts.module.css";
+import { getPosts } from "./_lib/getPosts";
+import { useTabStore } from "@/store/tab";
 
-const posts = [
-  {
-    title: "첫 번째 포스트: 새로운 시작",
-    contentImageUrl: "/",
-    content:
-      "새로운 프로젝트를 시작하는 것에 대한 흥분과 도전에 대해 이야기해보려 합니다.",
-    author: "김초보",
-    comment: 2,
-    date: "2024-03-15",
-    userImageUrl: "",
-    likes: 10,
-  },
-  {
-    title: "코딩의 즐거움",
-    contentImageUrl: "",
-    content:
-      "프로그래밍의 매력과 개발자로서의 성장 과정에 대한 개인적인 경험을 공유합니다.",
-    author: "이코더",
-    comment: 3,
-    date: "2024-03-14",
-    userImageUrl: "/",
-    likes: 15,
-  },
-  {
-    title: "디자인 트렌드 2024",
-    contentImageUrl: "",
-    content:
-      "올해의 주요 UI/UX 디자인 트렌드와 이를 실제 프로젝트에 적용하는 방법을 소개합니다.",
-    author: "박디자이너",
-    comment: 3,
-    date: "2024-03-13",
-    userImageUrl: "",
-    likes: 20,
-  },
-  {
-    title: "효율적인 팀 협업 방법",
-    contentImageUrl: "",
-    content:
-      "원격 근무 환경에서 팀의 생산성을 높이기 위한 실용적인 팁과 도구를 공유합니다.",
-    author: "최매니저",
-    comment: 20,
-    date: "2024-03-12",
-    userImageUrl: "",
-    likes: 25,
-  },
-  {
-    title: "AI와 미래의 개발",
-    contentImageUrl: "",
-    content:
-      "인공지능이 소프트웨어 개발에 미치는 영향과 개발자들이 준비해야 할 점들에 대해 논의합니다.",
-    author: "정AI전문가",
-    comment: 30,
-    date: "2024-03-11",
-    userImageUrl: "",
-    likes: 30,
-  },
-];
+interface PostData {
+  id: number;
+  title: string;
+  thumbnailUrl: string;
+  createdAt: string;
+  likeCount: number;
+}
 
 export default function Posts() {
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { activeTab } = useTabStore();
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await getPosts(activeTab);
+        setPosts(response.result.content);
+        console.log(posts);
+        setIsLoading(false);
+      } catch (err) {
+        console.error("에러 발생:", err);
+        setError("Failed to load posts. Please try again later.");
+        setIsLoading(false);
+      }
+    }
+
+    fetchPosts();
+  }, [activeTab]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <>
       <div className={styles.container}>
@@ -71,8 +51,19 @@ export default function Posts() {
           <SearchTab />
           <TabNav />
           <div className={styles.postsContainer}>
-            {posts.map((post, index) => (
-              <Post key={index} {...post} />
+            {posts.map((post) => (
+              <Post
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                thumbnailUrl={post.thumbnailUrl}
+                createdAt={post.createdAt}
+                likeCount={post.likeCount}
+                // 아래 필드들은 백엔드에서 제공하지 않으므로 기본값 또는 빈 값을 전달합니다
+                content=""
+                author=""
+                commentCount={0}
+              />
             ))}
           </div>
         </main>
