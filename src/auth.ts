@@ -1,86 +1,34 @@
-import NextAuth from "next-auth";
-import Google from "next-auth/providers/google";
-import kakao from "next-auth/providers/kakao";
-import naver from "next-auth/providers/naver";
+import NextAuth, { DefaultSession, Session, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import "next-auth";
 import { JWT } from "next-auth/jwt";
 
 declare module "next-auth" {
-  interface Session {
-    accessToken?: string;
-    provider?: string;
-  }
-
-  interface User {
-    accessToken?: string;
-    provider?: string;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    accessToken?: string;
-    provider?: string;
+  interface Session extends DefaultSession {
+    jsessionid?: string;
+    isAuthenticated?: boolean;
   }
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  providers: [
-    Google,
-    kakao,
-    naver,
-    CredentialsProvider({
-      name: "Custom",
-      credentials: {
-        provider: { type: "text" },
-      },
-      async authorize(credentials, req) {
-        const { provider } = credentials as { provider: string };
-
-        try {
-          const response = await fetch(
-            `http://localhost:8080/oauth2/authorization/${provider}`,
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            return {
-              id: data.id,
-              accessToken: data.accessToken,
-              provider: provider,
-            };
-          } else {
-            return null;
-          }
-        } catch (error) {
-          console.error("Authentication error:", error);
-          return null;
-        }
-      },
-    }),
-  ],
+  providers: [],
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.accessToken = user.accessToken;
-        token.provider = account?.provider || user.provider;
+    async session({ session }) {
+      // JSESSIONID의 존재 여부만 확인합니다.
+      const jsessionid = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("JSESSIONID="))
+        ?.split("=")[1];
+      if (jsessionid) {
+        session.isAuthenticated = true;
+        session.jsessionid = jsessionid;
+      } else {
+        session.isAuthenticated = false;
       }
-      return token;
-    },
-    async session({ session, token }) {
-      session.provider = token.provider;
       return session;
     },
   },
-  secret: process.env.AUTH_SECRET,
+  // JWT 전략을 사용하지만, 실제 토큰 생성은 하지 않습니다.
+  session: {
+    strategy: "jwt",
+  },
 });
-
-export { handlers as GET, handlers as POST };

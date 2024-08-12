@@ -1,9 +1,22 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { useEffect } from "react";
+import { signIn, useSession } from "next-auth/react";
 import styles from "./Login.module.css";
 
 export default function Login() {
+  const { status } = useSession();
+
+  useEffect(() => {
+    // JSESSIONID가 존재하면 NextAuth 세션을 시작합니다.
+    const jsessionid = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("JSESSIONID="));
+    if (jsessionid && status === "unauthenticated") {
+      signIn("credentials", { redirect: false });
+    }
+  }, [status]);
+
   const handleSignIn = (provider: string) => {
     const authUrl = `http://localhost:8080/oauth2/authorization/${provider}`;
     window.location.href = authUrl;
