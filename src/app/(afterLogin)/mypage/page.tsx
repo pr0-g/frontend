@@ -1,10 +1,10 @@
-import Link from "next/link";
 import UnderNavigation from "../_components/UnderNavigation";
 import SubscriptionWriter from "./_components/SubscriptionWriter";
 import styles from "./mypage.module.css";
 import SelectedInterests from "./_components/SelectedInterests";
 import Chatbot from "./_components/Chatbot";
 import Setting from "./_components/Setting";
+import UserGreeting from "./_components/UserGreeting";
 
 const subscriptionItems = [
   { profileImage: "", name: "작가1" },
@@ -23,14 +23,7 @@ export default function Mypage() {
     <div className={styles.container}>
       <header className={styles.header}>PROG</header>
       <main className={styles.main}>
-        <div className={styles.myInfo}>
-          <div>
-            <span className={styles.nickname}>닉네임</span>님 안녕하세요!
-          </div>
-          <div className={styles.edit}>
-            <Link href="/mypage/edit/nickname">닉네임 수정하기</Link>
-          </div>
-        </div>
+        <UserGreeting />
         <div className={styles.interests}>
           <SelectedInterests selectedInterests={["Interest 1", "Interest 2"]} />
         </div>

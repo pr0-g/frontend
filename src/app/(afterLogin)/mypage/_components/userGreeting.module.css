@@ -1,0 +1,12 @@
+.myInfo {
+  width: 100%;
+}
+
+.nickname {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.edit {
+  color: #b2b1b1;
+}
