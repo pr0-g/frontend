@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getInterests } from "../_lib/getInterests";
+import { putInterests } from "../_lib/putInterests";
 import { useRouter } from "next/navigation";
 import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 import styles from "./interests.module.css";
@@ -18,23 +19,49 @@ interface ApiResponse {
 }
 
 export default function Interests() {
-  const [interests, setInterests] = useState<string[]>([]);
+  const [interests, setInterests] = useState<Interest[]>([]);
+  const [selectedInterests, setSelectedInterests] = useState<number[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchInterests = async () => {
-      const data: ApiResponse | null = await getInterests();
-      if (data && data.code === "SUCCESS") {
-        const interestNames = data.result.map((interest) => interest.name);
-        setInterests(interestNames);
+      try {
+        const data: ApiResponse | null = await getInterests();
+        if (data && data.code === "SUCCESS") {
+          setInterests(data.result);
+        }
+      } catch (error) {
+        console.error("Failed to fetch interests:", error);
+        setError("관심 분야를 불러오는데 실패했습니다.");
       }
     };
 
     fetchInterests();
   }, []);
 
-  const onclick = () => {
-    router.push(`/mypage`);
+  const handleInterestClick = (id: number) => {
+    setSelectedInterests((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await putInterests(selectedInterests);
+      alert("관심 분야가 성공적으로 업데이트되었습니다.");
+      router.push(`/mypage`);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "알 수 없는 오류가 발생했습니다."
+      );
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -45,16 +72,34 @@ export default function Interests() {
           <div className={styles.ment}>관심 분야를 선택해 주세요</div>
           <div className={styles.interestsSection}>
             <div className={styles.interestItems}>
-              {interests.map((interest, index) => (
-                <div key={index} className={styles.interestItem}>
-                  {interest}
+              {interests.map((interest) => (
+                <div
+                  key={interest.id}
+                  className={`${styles.interestItem} ${
+                    selectedInterests.includes(interest.id)
+                      ? styles.selected
+                      : ""
+                  }`}
+                  onClick={() => handleInterestClick(interest.id)}
+                >
+                  {interest.name}
                 </div>
               ))}
             </div>
           </div>
-          <div className={styles.registerButton} onClick={onclick}>
-            수정하기
+          <div
+            className={styles.registerButton}
+            onClick={handleSubmit}
+            style={{
+              opacity: isLoading ? 0.5 : 1,
+              cursor: isLoading ? "not-allowed" : "pointer",
+            }}
+          >
+            {isLoading ? "수정 중..." : "수정하기"}
           </div>
+          {error && (
+            <p style={{ color: "red", textAlign: "center" }}>{error}</p>
+          )}
         </main>
       </div>
     </>
