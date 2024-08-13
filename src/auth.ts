@@ -13,21 +13,38 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [],
   callbacks: {
     async session({ session }) {
-      // JSESSIONID의 존재 여부만 확인합니다.
+      // JSESSIONID 확인
       const jsessionid = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("JSESSIONID="))
-        ?.split("=")[1];
+          .split("; ")
+          .find((row) => row.startsWith("JSESSIONID="))
+          ?.split("=")[1];
+
       if (jsessionid) {
         session.isAuthenticated = true;
         session.jsessionid = jsessionid;
+
+        // 사용자 정보 가져오기
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/me`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Cookie': `JSESSIONID=${jsessionid}`
+            }
+          });
+          if (response.ok) {
+            const userData = await response.json();
+            session.user = userData.result; // CommonResponse의 구조에 맞춰 수정
+          }
+        } catch (error) {
+          console.error('Failed to fetch user data', error);
+        }
       } else {
         session.isAuthenticated = false;
       }
       return session;
     },
   },
-  // JWT 전략을 사용하지만, 실제 토큰 생성은 하지 않습니다.
   session: {
     strategy: "jwt",
   },

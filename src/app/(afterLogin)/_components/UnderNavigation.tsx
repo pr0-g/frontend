@@ -9,10 +9,10 @@ export default function UnderNavigation() {
         {/* <Link href="/"> */}
         <div className={styles.navItem}>글</div>
         {/* </Link> */}
-        <Link href="/">
+        <Link href="/posts">
           <div className={styles.navItem}>P</div>
         </Link>
-        <Link href="/my">
+        <Link href="/mypage">
           <div className={styles.navItem}>마</div>
         </Link>
       </div>
