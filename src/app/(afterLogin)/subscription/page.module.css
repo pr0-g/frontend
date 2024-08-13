@@ -4,14 +4,6 @@
   max-width: inherit;
   margin: 0 auto;
   padding: 1rem;
-
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.subscriptionList::-webkit-scrollbar {
-  display: none;
 }
 
 .pageTitle {
@@ -31,7 +23,14 @@
   flex-direction: column;
   width: inherit;
   height: 90%;
+
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.subscriptionList::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 600px) {
