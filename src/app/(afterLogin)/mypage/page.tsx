@@ -7,10 +7,14 @@ import SelectedInterests from "./_components/SelectedInterests";
 import Chatbot from "./_components/Chatbot";
 import Setting from "./_components/Setting";
 import UserGreeting from "./_components/UserGreeting";
-import {useEffect, useState} from "react";
-import {getUserInfo} from "@/app/(afterLogin)/mypage/getUserInfo";
-import {router} from "next/client";
+import { useEffect, useState } from "react";
+import { getUserInfo } from "@/app/(afterLogin)/mypage/getUserInfo";
+import { router } from "next/client";
 
+interface Interest {
+  id: number;
+  name: string;
+}
 
 interface UserInfoRequest {
   userId: number;
@@ -19,7 +23,7 @@ interface UserInfoRequest {
   nickname: string | null;
   provider: string;
   isLoggedIn: boolean;
-  interests: string[];
+  interests: Interest[];
 }
 
 const subscriptionItems = [
@@ -34,14 +38,12 @@ const subscriptionItems = [
   { profileImage: "", name: "작가9" },
 ];
 
-
 export default function Mypage() {
   const [userData, setUserData] = useState<UserInfoRequest | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
-
       try {
         const response = await getUserInfo();
         setUserData(response.result);
@@ -57,18 +59,18 @@ export default function Mypage() {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router?.push('/');
+      router?.push("/");
     }
   }, [isLoggedIn, router]);
-
-
+  console.log(userData);
+  console.log(userData?.interests);
   return (
     <div className={styles.container}>
       <header className={styles.header}>PROG</header>
       <main className={styles.main}>
         <UserGreeting userData={userData} />
         <div className={styles.interests}>
-            <SelectedInterests selectedInterests={userData?.interests || []} />
+          <SelectedInterests selectedInterests={userData?.interests} />
         </div>
         <div className={styles.standard}>
           <SubscriptionWriter
