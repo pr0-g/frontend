@@ -1,17 +1,23 @@
 export async function getUserInfo() {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/me`,
+        { method: "GET", credentials: "include", cache: "no-store" }
+    );
 
-  const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/me`,
-      {
-        credentials: "include",
-      }
-  );
+    const userInfo = await res.json();
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch posts");
-  }
+    const interestsRes = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/interests/user`,
+        { method: "GET", credentials: "include", cache: "no-store" }
+    );
 
-  const data = await res.json();
+    const interests = await interestsRes.json();
 
-  return data;
+    return {
+        ...userInfo,
+        result: {
+            ...userInfo.result,
+            interests: interests.result
+        }
+    };
 }

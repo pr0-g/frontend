@@ -19,6 +19,7 @@ interface UserInfoRequest {
   nickname: string | null;
   provider: string;
   isLoggedIn: boolean;
+  interests: string[];
 }
 
 const subscriptionItems = [
@@ -32,6 +33,7 @@ const subscriptionItems = [
   { profileImage: "", name: "작가8" },
   { profileImage: "", name: "작가9" },
 ];
+
 
 export default function Mypage() {
   const [userData, setUserData] = useState<UserInfoRequest | null>(null);
@@ -66,7 +68,7 @@ export default function Mypage() {
       <main className={styles.main}>
         <UserGreeting userData={userData} />
         <div className={styles.interests}>
-          <SelectedInterests selectedInterests={["Interest 1", "Interest 2"]} />
+            <SelectedInterests selectedInterests={userData?.interests || []} />
         </div>
         <div className={styles.standard}>
           <SubscriptionWriter
