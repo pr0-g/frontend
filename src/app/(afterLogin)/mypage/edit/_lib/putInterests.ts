@@ -1,31 +1,26 @@
 export async function putInterests(selectedInterests: number[]) {
-  console.log("Attempting to update interests:", selectedInterests);
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/interests/user/edit`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ interests: selectedInterests }),
-        credentials: "include",
-      }
-    );
+    try {
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/interests/user/edit`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ interestIdList: selectedInterests }),
+                credentials: 'include' // 이 옵션으로 쿠키가 자동으로 포함됩니다
+            }
+        );
 
-    console.log("Response status:", res.status);
+        if (!response.ok) {
+            // 응답 본문을 텍스트로 읽어 에러 메시지에 포함시킵니다
+            const errorText = await response.text();
+            throw new Error(`관심사 업데이트에 실패했습니다. 서버 응답: ${errorText}`);
+        }
 
-    if (!res.ok) {
-      const errorData = await res.json().catch(() => null);
-      console.error("Error data:", errorData);
-      throw new Error(errorData?.message || "Failed to update interests");
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating interests:', error);
+        throw error;
     }
-
-    const responseData = await res.json();
-    console.log("Response data:", responseData);
-    return responseData;
-  } catch (error) {
-    console.error("Error in putInterests:", error);
-    throw error;
-  }
 }

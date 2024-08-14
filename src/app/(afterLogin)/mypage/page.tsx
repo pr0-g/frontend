@@ -7,8 +7,19 @@ import SelectedInterests from "./_components/SelectedInterests";
 import Chatbot from "./_components/Chatbot";
 import Setting from "./_components/Setting";
 import UserGreeting from "./_components/UserGreeting";
-import {useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
+import {getUserInfo} from "@/app/(afterLogin)/mypage/getUserInfo";
+import {router} from "next/client";
+
+
+interface UserInfoRequest {
+  userId: number;
+  email: string;
+  name: string;
+  nickname: string | null;
+  provider: string;
+  isLoggedIn: boolean;
+}
 
 const subscriptionItems = [
   { profileImage: "", name: "작가1" },
@@ -23,37 +34,32 @@ const subscriptionItems = [
 ];
 
 export default function Mypage() {
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<UserInfoRequest | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
+
       try {
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/me`,
-            {
-              method: "GET",
-              credentials: "include",
-              cache: "no-store",
-            }
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-
-        const data = await response.json();
-        setUserData(data.result);
-        console.log("userData: ", data.result);
-      } catch (error) {
-        console.error("Failed to fetch user data:", error);
-        setError("사용자 정보를 불러오는데 실패했습니다.");
+        const response = await getUserInfo();
+        setUserData(response.result);
+        setIsLoggedIn(response.result.isLoggedIn);
+        console.log(userData);
+      } catch (err) {
+        console.error("에러 발생:", err);
       }
     };
 
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router?.push('/');
+    }
+  }, [isLoggedIn, router]);
+
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>PROG</header>
