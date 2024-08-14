@@ -1,4 +1,4 @@
-import styles from "./Post.module.css";
+import styles from "./ProfilePost.module.css";
 import Image from "next/image";
 
 interface PostProps {
@@ -40,7 +40,7 @@ export default function Post({
             {new Date(createdAt).toLocaleDateString()}
           </div>
           <div className={styles.comment}>{commentCount}개의 댓글</div>
-          <div>♡ {likeCount}</div>
+          <div className={styles.like}>♡ {likeCount}</div>
         </div>
         <div className={styles.rightInfo}>비공개~</div>
       </div>

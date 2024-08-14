@@ -54,11 +54,17 @@
   font-size: 0.8rem;
   color: #666;
   margin-right: 0.5rem;
+  min-width: 4.2rem;
 }
 
 .comment {
   font-size: 0.8rem;
   color: #666;
+  min-width: 4.2rem;
+}
+
+.like {
+  min-width: 4.2rem;
 }
 
 .rightInfo {

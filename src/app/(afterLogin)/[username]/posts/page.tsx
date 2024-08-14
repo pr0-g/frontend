@@ -1,4 +1,4 @@
-import Post from "@/app/(afterLogin)/[username]/posts/_components/Post";
+import Post from "@/app/(afterLogin)/[username]/posts/_components/ProfilePost";
 import UnderNavigation from "../../_components/UnderNavigation";
 import style from "./profile.module.css";
 
@@ -42,9 +42,10 @@ export default function Profile() {
         <div className={style.profile}>
           <img src={user.image} alt={user.nickname} className={style.avatar} />
           <h2>{user.nickname}</h2>
+          {/*내 프로필인지 다른 사용자의 프로필인지에 따라 buttons의 button 변경하도록 수정 필요*/}
           <div className={style.buttons}>
             <button className={style.button}>임시 글</button>
-            <button className={style.button}>세글</button>
+            <button className={style.button}>새글</button>
           </div>
         </div>
         <div className={style.posts}>
