@@ -9,7 +9,8 @@ import Setting from "./_components/Setting";
 import UserGreeting from "./_components/UserGreeting";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/app/(afterLogin)/mypage/getUserInfo";
-import { router } from "next/client";
+import { useInterestsStore } from "@/store/interests";
+// import { router } from "next/client";
 
 interface Interest {
   id: number;
@@ -41,6 +42,7 @@ const subscriptionItems = [
 export default function Mypage() {
   const [userData, setUserData] = useState<UserInfoRequest | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const setInterests = useInterestsStore((state) => state.setInterests);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -48,29 +50,29 @@ export default function Mypage() {
         const response = await getUserInfo();
         setUserData(response.result);
         setIsLoggedIn(response.result.isLoggedIn);
-        console.log(userData);
+        setInterests(response.result.interests);
       } catch (err) {
         console.error("에러 발생:", err);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [setInterests]);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router?.push("/");
-    }
-  }, [isLoggedIn, router]);
-  console.log(userData);
-  console.log(userData?.interests);
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     router?.push("/");
+  //   }
+  // }, [isLoggedIn, router]);
+
+  console.log("hi", isLoggedIn);
   return (
     <div className={styles.container}>
       <header className={styles.header}>PROG</header>
       <main className={styles.main}>
         <UserGreeting userData={userData} />
         <div className={styles.interests}>
-          <SelectedInterests selectedInterests={userData?.interests} />
+          <SelectedInterests />
         </div>
         <div className={styles.standard}>
           <SubscriptionWriter

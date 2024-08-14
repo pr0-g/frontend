@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./selectedInterests.module.css";
 import Link from "next/link";
+import { useInterestsStore } from "@/store/interests";
+// 실제 경로로 수정해주세요
 
 interface Interest {
   id: number;
   name: string;
 }
 
-interface Props {
-  selectedInterests?: Interest[];
-}
+export default function SelectedInterests() {
+  const interests = useInterestsStore((state) => state.interests);
 
-export default function SelectedInterests({ selectedInterests }: Props) {
   return (
     <div className={styles.selectedInterestsContainer}>
       <div className={styles.header}>
@@ -26,7 +26,7 @@ export default function SelectedInterests({ selectedInterests }: Props) {
       </div>
       <div className={styles.itemsWrap}>
         <div className={styles.items}>
-          {selectedInterests?.map((item) => (
+          {interests.map((item) => (
             <div key={item.id} className={styles.item}>
               <p className={styles.writerName}>{item.name}</p>
             </div>
