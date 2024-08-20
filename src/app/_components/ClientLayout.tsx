@@ -15,7 +15,7 @@ export default function ClientLayout({
 }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <body className={inter.className}>{children}</body>
+      <div className={inter.className}>{children}</div>
       <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
