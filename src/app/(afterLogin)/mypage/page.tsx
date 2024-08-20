@@ -78,14 +78,14 @@ export default function Mypage() {
           <SubscriptionWriter
             subscriptionItems={subscriptionItems}
             title="구독 작가"
-            viewAllLink="/"
+            viewAllLink="/subscription/standard"
           />
         </div>
         <div className={styles.premium}>
           <SubscriptionWriter
             subscriptionItems={subscriptionItems}
             title="프리미엄 구독 작가"
-            viewAllLink="/"
+            viewAllLink="/subscription/premium"
           />
         </div>
         <div className={styles.chatbot}>
