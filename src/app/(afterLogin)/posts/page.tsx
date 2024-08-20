@@ -9,6 +9,7 @@ import styles from "./posts.module.css";
 import { getPosts } from "./_lib/getPosts";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import { useTabStore } from "@/store/tab";
 
 interface Post {
   id: number;
@@ -30,15 +31,21 @@ interface APIResponse {
 }
 
 export default function Posts() {
+  const { activeTab } = useTabStore();
+
+  const tabValues = ["trending", "recent", "subscribed", "liked"];
+  const tabValue =
+    activeTab >= 0 && activeTab <= 3 ? tabValues[activeTab] : "recent";
+
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
     APIResponse,
     Error,
     InfiniteData<APIResponse>,
-    ["posts", "recent"],
+    ["posts", string],
     number
   >({
-    queryKey: ["posts", "recent"],
-    queryFn: ({ pageParam = 0 }) => getPosts(pageParam),
+    queryKey: ["posts", tabValue],
+    queryFn: ({ pageParam = 0 }) => getPosts(pageParam, tabValue),
     initialPageParam: 0,
     getNextPageParam: (lastPage) =>
       lastPage.result.last ? undefined : lastPage.result.number + 1,

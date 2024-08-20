@@ -1,13 +1,14 @@
 import api from "@/app/_lib/api";
 
-export async function getPosts(pageParam: number = 0) {
-  const tabValues = ["trending", "recent", "subscribed", "liked"];
-
+export async function getPosts(
+  pageParam: number = 0,
+  tabValue: string = "trending"
+) {
   const res = await fetch(
-    `${api}/api/posts/recent?page=${pageParam}&size=${4}`,
+    `${api}/api/posts/${tabValue}?page=${pageParam}&size=${4}`,
     {
       next: {
-        tags: ["posts", "recent"],
+        tags: ["posts", tabValue],
       },
       method: "GET",
       credentials: "include",
