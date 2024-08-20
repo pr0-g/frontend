@@ -1,18 +1,19 @@
 import api from "@/app/_lib/api";
 
-export async function getPosts(activeTab: number) {
+export async function getPosts(pageParam: number = 0) {
   const tabValues = ["trending", "recent", "subscribed", "liked"];
-  console.log(activeTab);
 
-  const res = await fetch(`${api}/api/posts/recent?page=${0}&size=${10}`, {
-    method: "GET",
-    credentials: "include",
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch posts");
-  }
+  const res = await fetch(
+    `${api}/api/posts/recent?page=${pageParam}&size=${4}`,
+    {
+      next: {
+        tags: ["posts", "recent"],
+      },
+      method: "GET",
+      credentials: "include",
+      cache: "no-store",
+    }
+  );
 
   const data = await res.json();
 

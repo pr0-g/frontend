@@ -1,15 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SearchTab from "../_components/SearchTab";
 import UnderNavigation from "../_components/UnderNavigation";
 import Post from "./_component/Post";
 import TabNav from "./_component/TabNav";
 import styles from "./posts.module.css";
 import { getPosts } from "./_lib/getPosts";
-import { useTabStore } from "@/store/tab";
+import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
 
-interface PostData {
+interface Post {
   id: number;
   title: string;
   thumbnailUrl: string;
@@ -17,31 +18,44 @@ interface PostData {
   likeCount: number;
 }
 
+interface APIResponse {
+  code: string;
+  message: string;
+  result: {
+    content: Post[];
+    last: boolean;
+    number: number;
+    totalPages: number;
+  };
+}
+
 export default function Posts() {
-  const [posts, setPosts] = useState<PostData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const { activeTab } = useTabStore();
+  const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery<
+    APIResponse,
+    Error,
+    InfiniteData<APIResponse>,
+    ["posts", "recent"],
+    number
+  >({
+    queryKey: ["posts", "recent"],
+    queryFn: ({ pageParam = 0 }) => getPosts(pageParam),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) =>
+      lastPage.result.last ? undefined : lastPage.result.number + 1,
+    staleTime: 60 * 1000,
+    gcTime: 300 * 1000,
+  });
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "0px",
+  });
 
   useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const response = await getPosts(activeTab);
-        setPosts(response.result.content);
-        console.log(posts);
-        setIsLoading(false);
-      } catch (err) {
-        console.error("에러 발생:", err);
-        setError("Failed to load posts. Please try again later.");
-        setIsLoading(false);
-      }
+    if (inView && !isFetching && hasNextPage) {
+      fetchNextPage();
     }
-
-    fetchPosts();
-  }, [activeTab]);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  }, [inView, isFetching, hasNextPage, fetchNextPage]);
 
   return (
     <>
@@ -51,20 +65,25 @@ export default function Posts() {
           <SearchTab />
           <TabNav />
           <div className={styles.postsContainer}>
-            {posts.map((post) => (
-              <Post
-                key={post.id}
-                id={post.id}
-                title={post.title}
-                thumbnailUrl={post.thumbnailUrl}
-                createdAt={post.createdAt}
-                likeCount={post.likeCount}
-                // 아래 필드들은 백엔드에서 제공하지 않으므로 기본값 또는 빈 값을 전달합니다
-                content=""
-                author=""
-                commentCount={0}
-              />
+            {data?.pages.map((page, i) => (
+              <React.Fragment key={i}>
+                {page.result.content.map((post) => (
+                  <Post
+                    key={post.id}
+                    id={post.id}
+                    title={post.title}
+                    thumbnailUrl={post.thumbnailUrl}
+                    createdAt={post.createdAt}
+                    likeCount={post.likeCount}
+                    content=""
+                    author=""
+                    commentCount={0}
+                  />
+                ))}
+              </React.Fragment>
             ))}
+            {isFetching && <div>Loading more...</div>}
+            <div ref={ref} style={{ height: 20, background: "transparent" }} />
           </div>
         </main>
       </div>

@@ -1,3 +1,4 @@
+import HeartIcon from "../../_components/HeartIcon";
 import styles from "./Post.module.css";
 import Image from "next/image";
 
@@ -46,12 +47,7 @@ export default function Post({
         <div className={styles.userInfoAndLike}>
           <div className={styles.userInfo}>
             <div className={styles.userImageWrap}>
-              <Image
-                src="/default-profile.png"
-                alt={author}
-                width={40}
-                height={40}
-              />
+              <HeartIcon fill="red" width="32" height="32" />
             </div>
             <p className={styles.author}>{author}</p>
           </div>
