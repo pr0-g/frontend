@@ -8,9 +8,9 @@ import Chatbot from "./_components/Chatbot";
 import Setting from "./_components/Setting";
 import UserGreeting from "./_components/UserGreeting";
 import { useEffect, useState } from "react";
-import { getUserInfo } from "@/app/(afterLogin)/mypage/getUserInfo";
 import { useInterestsStore } from "@/store/interests";
-// import { router } from "next/client";
+import { getUserInfo } from "./_lib/getUserInfo";
+import { getUserInterests } from "./_lib/getUserInterests";
 
 interface Interest {
   id: number;
@@ -41,31 +41,23 @@ const subscriptionItems = [
 
 export default function Mypage() {
   const [userData, setUserData] = useState<UserInfoRequest | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const setInterests = useInterestsStore((state) => state.setInterests);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await getUserInfo();
-        setUserData(response.result);
-        setIsLoggedIn(response.result.isLoggedIn);
-        setInterests(response.result.interests);
+        const userInfoData = await getUserInfo();
+        const userInterestsData = await getUserInterests();
+        setUserData(userInfoData.result);
+        setInterests(userInterestsData.result);
       } catch (err) {
         console.error("에러 발생:", err);
       }
     };
 
     fetchUserData();
-  }, [setInterests]);
+  }, []);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     router?.push("/");
-  //   }
-  // }, [isLoggedIn, router]);
-
-  console.log("hi", isLoggedIn);
   return (
     <div className={styles.container}>
       <header className={styles.header}>PROG</header>
