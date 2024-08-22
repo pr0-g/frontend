@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: #fff !important;
+  max-width: 76.8rem;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 50rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 2rem 2rem 5rem;
+  padding-bottom: 80px;
+}
+
+.editorBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.titleInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  font-size: clamp(24px, 3.5vw, 50px);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.interestWrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  margin: 0.4rem;
+}
+
+.quillWrapper {
+  width: 100%;
+  background-color: white;
+}
+
+.submitButtonWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.4rem;
+}
