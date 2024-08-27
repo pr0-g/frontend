@@ -1,4 +1,4 @@
-.subscriptionsContainer {
+.subScriptionContainer {
   width: 100%;
   max-width: 50rem;
   margin: 0 auto;
@@ -29,26 +29,10 @@
 }
 
 .itemsWrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 2px solid #d9d9d9;
   border-radius: 10px;
   width: 100%;
-  padding: 1rem;
-}
-
-.items {
-  display: flex;
-  gap: 2%;
-  width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.items::-webkit-scrollbar {
-  display: none;
+  padding: 1.5rem;
 }
 
 .item {
@@ -56,14 +40,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  flex: 0 0 14%;
   aspect-ratio: 1.2 / 1.4;
   min-width: 3.5rem;
   background-color: #e0e0e0;
 }
 
 .profileImageWrapper {
-  width: inherit;
+  width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -82,4 +65,39 @@
   align-content: start;
   font-size: 0.6rem;
   padding-bottom: 0.4rem;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
+  background-color: #ffff;
+  border: 1px solid rgb(155, 132, 136);
+  color: rgb(161, 144, 147);
+  padding: 15px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+.prevArrow {
+  left: -20px;
+}
+
+.nextArrow {
+  right: -20px;
+}
+
+.itemsWrap :global(.slick-list) {
+  margin: 0 -5px;
+}
+
+.itemsWrap :global(.slick-slide > div) {
+  padding: 0 5px;
 }
