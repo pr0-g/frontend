@@ -16,7 +16,11 @@ interface Post {
   title: string;
   thumbnailUrl: string;
   createdAt: string;
+  updatedAt: string | null;
+  interestId: number;
+  userId: number;
   likeCount: number;
+  writerId: string;
 }
 
 interface APIResponse {
@@ -81,10 +85,11 @@ export default function Posts() {
                     title={post.title}
                     thumbnailUrl={post.thumbnailUrl}
                     createdAt={post.createdAt}
+                    updatedAt={post.updatedAt}
                     likeCount={post.likeCount}
-                    content=""
-                    author=""
-                    commentCount={0}
+                    interestId={post.interestId}
+                    userId={post.userId}
+                    writerId={post.writerId}
                   />
                 ))}
               </React.Fragment>

@@ -14,8 +14,6 @@ export async function putHeart({ targetPostId }: HeartInterface) {
     },
     body: JSON.stringify({ postId: targetPostId }),
   });
-  console.log(res);
-  console.log({ postId: targetPostId });
 
   const data = await res.json();
 
