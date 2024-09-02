@@ -21,7 +21,7 @@ interface UserInfoRequest {
   userId: number;
   email: string;
   name: string;
-  nickname: string | null;
+  nickname?: string;
   provider: string;
   isLoggedIn: boolean;
   interests: Interest[];
