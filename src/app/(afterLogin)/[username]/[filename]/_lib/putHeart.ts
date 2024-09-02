@@ -1,10 +1,10 @@
 import api from "@/app/_lib/api";
 
 interface HeartInterface {
-  targetPostId: number;
+  activePostId: number;
 }
 
-export async function putHeart({ targetPostId }: HeartInterface) {
+export async function putHeart({ activePostId }: HeartInterface) {
   const res = await fetch(`${api}/api/posts/like`, {
     method: "PUT",
     credentials: "include",
@@ -12,7 +12,7 @@ export async function putHeart({ targetPostId }: HeartInterface) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ postId: targetPostId }),
+    body: JSON.stringify({ postId: activePostId }),
   });
 
   const data = await res.json();

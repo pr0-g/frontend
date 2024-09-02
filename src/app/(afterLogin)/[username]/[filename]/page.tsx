@@ -24,9 +24,6 @@ export default function PostDetail() {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
-  // 임의로 postId를 1로 설정
-  const targetPostId = 1;
-
   useEffect(() => {
     async function fetchPostDetail() {
       if (!activePostId) {
@@ -52,7 +49,7 @@ export default function PostDetail() {
 
   const handleHeartClick = async () => {
     try {
-      const data = await putHeart({ targetPostId });
+      const data = await putHeart({ activePostId });
       console.log(data);
       setIsLiked(data.result.liked);
       setLikeCount(data.result.likeCount);
