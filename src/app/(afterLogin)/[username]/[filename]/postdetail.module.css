@@ -36,6 +36,8 @@
 }
 
 .fixedHeart {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   left: calc(50% - 35rem);
   top: 50%;

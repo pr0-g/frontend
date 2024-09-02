@@ -22,7 +22,7 @@ export default function PostDetail() {
   const [postDetail, setPostDetail] = useState<PostDetail | null>(null);
   const activePostId = usePostIdStore((state) => state.activePostId);
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState<number | undefined>(0);
 
   useEffect(() => {
     async function fetchPostDetail() {
@@ -35,7 +35,8 @@ export default function PostDetail() {
 
         if (response.code === "SUCCESS") {
           setPostDetail(response.result);
-          console.log(postDetail);
+          setLikeCount(response.result.likeCount);
+          setIsLiked(response.result.liked);
         } else {
           throw new Error(response.message);
         }
@@ -50,10 +51,8 @@ export default function PostDetail() {
   const handleHeartClick = async () => {
     try {
       const data = await putHeart({ activePostId });
-      console.log(data);
       setIsLiked(data.result.liked);
       setLikeCount(data.result.likeCount);
-      console.log(likeCount, isLiked);
     } catch (error) {
       console.error("Failed to update like status:", error);
     }
