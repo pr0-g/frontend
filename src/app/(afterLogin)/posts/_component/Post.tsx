@@ -63,7 +63,10 @@ export default function Post({
               </div>
               <p className={styles.author}>작가</p>
             </div>
-            <div>♡ {likeCount}</div>
+            <div className={styles.likeWrap}>
+              <HeartIcon width="24" height="24" />
+              <p>{likeCount}</p>
+            </div>
           </div>
         </div>
       </div>

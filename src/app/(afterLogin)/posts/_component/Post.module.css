@@ -81,3 +81,9 @@
   font-size: 0.8rem;
   color: #666;
 }
+
+.likeWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
