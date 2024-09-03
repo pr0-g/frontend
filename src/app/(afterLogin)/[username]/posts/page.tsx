@@ -1,6 +1,7 @@
 import Post from "@/app/(afterLogin)/[username]/posts/_components/ProfilePost";
 import UnderNavigation from "../../_components/UnderNavigation";
 import style from "./profile.module.css";
+import Header from "../../_components/Header";
 
 export default function Profile() {
   const user = {
@@ -35,9 +36,7 @@ export default function Profile() {
 
   return (
     <div className={style.container}>
-      <header className={style.header}>
-        <h1>PROG</h1>
-      </header>
+      <Header />
       <main className={style.main}>
         <div className={style.profile}>
           <img src={user.image} alt={user.nickname} className={style.avatar} />

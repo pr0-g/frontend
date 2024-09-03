@@ -1,3 +1,4 @@
+import Header from "../_components/Header";
 import UnderNavigation from "../_components/UnderNavigation";
 import SaveItem from "./_component/SaveItem";
 import styles from "./save.module.css";
@@ -12,7 +13,7 @@ export default function Save() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.header}>PROG</div>
+        <Header />
         <main className={styles.main}>
           <h1 className={styles.pageTitle}>임시 글</h1>
           <div className={styles.temporaryWritingList}>

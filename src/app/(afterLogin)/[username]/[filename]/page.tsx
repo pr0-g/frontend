@@ -7,15 +7,20 @@ import styles from "./postdetail.module.css";
 import { putHeart } from "./_lib/putHeart";
 import { usePostIdStore } from "@/store/post";
 import { getDetail } from "./_lib/getDetail";
+import Header from "../../_components/Header";
 
 interface PostDetail {
   id: number;
   title: string;
-  content: string;
-  likeCount: number;
+  writerId: number;
+  writerNickname: string;
+  interestId: number;
   thumbnailUrl: string;
   createdAt: string | null;
   updatedAt: string | null;
+  content: string;
+  likeCount: number;
+  userLiked: boolean;
 }
 
 export default function PostDetail() {
@@ -36,7 +41,7 @@ export default function PostDetail() {
         if (response.code === "SUCCESS") {
           setPostDetail(response.result);
           setLikeCount(response.result.likeCount);
-          setIsLiked(response.result.liked);
+          setIsLiked(response.result.userLiked);
         } else {
           throw new Error(response.message);
         }
@@ -59,10 +64,11 @@ export default function PostDetail() {
   };
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>PROG</h1>
-      </header>
-      <main className={styles.main}>{/* 게시글 내용 */}</main>
+      <Header />
+      <main className={styles.main}>
+        <div className={styles.title}>{postDetail?.title}</div>
+        <div className={styles.info}></div>
+      </main>
       <div className={styles.fixedHeart} onClick={handleHeartClick}>
         <HeartIcon stroke={isLiked ? "red" : "currentColor"} fill="none" />
         <span className={styles.likeCount}>{likeCount}</span>

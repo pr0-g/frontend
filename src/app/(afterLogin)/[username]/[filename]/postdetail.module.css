@@ -11,12 +11,6 @@
   margin: 0 auto;
 }
 
-.header {
-  width: 100%;
-  text-align: center;
-  padding: 1rem 0;
-}
-
 .main {
   flex: 1;
   display: flex;
@@ -32,7 +26,13 @@
 
   border: 1px solid black;
 
-  padding: 5rem 2rem;
+  padding: 3rem 2rem;
+}
+
+.title {
+  width: inherit;
+  font-size: 3rem;
+  font-weight: 900;
 }
 
 .fixedHeart {

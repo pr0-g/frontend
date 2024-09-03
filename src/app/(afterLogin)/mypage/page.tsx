@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useInterestsStore } from "@/store/interests";
 import { getUserInfo } from "./_lib/getUserInfo";
 import { getUserInterests } from "./_lib/getUserInterests";
+import Header from "../_components/Header";
 
 interface Interest {
   id: number;
@@ -60,7 +61,7 @@ export default function Mypage() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>PROG</header>
+      <Header />
       <main className={styles.main}>
         <UserGreeting userData={userData} />
         <div className={styles.interests}>

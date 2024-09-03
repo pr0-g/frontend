@@ -9,6 +9,7 @@ import { putPost } from "./_lib/putPost";
 import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.snow.css";
 import { getInterests } from "../_lib/getInterests";
+import Header from "../_components/Header";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
@@ -93,7 +94,7 @@ export default function Editor() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>PROG</div>
+      <Header />
       <div className={styles.main}>
         <form onSubmit={onSubmit} className={styles.editorBody}>
           <input

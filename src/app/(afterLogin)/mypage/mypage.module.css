@@ -11,12 +11,6 @@
   margin: 0 auto;
 }
 
-.header {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
 .main {
   flex: 1;
   display: flex;

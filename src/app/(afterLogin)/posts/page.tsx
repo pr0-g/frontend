@@ -10,6 +10,7 @@ import { getPosts } from "./_lib/getPosts";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useTabStore } from "@/store/tab";
+import Header from "../_components/Header";
 
 interface Post {
   id: number;
@@ -71,7 +72,7 @@ export default function Posts() {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.header}>PROG</div>
+        <Header />
         <main className={styles.main}>
           <SearchTab />
           <TabNav />
