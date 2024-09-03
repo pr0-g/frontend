@@ -26,7 +26,7 @@ export default function SelectedInterests() {
       </div>
       <div className={styles.itemsWrap}>
         <div className={styles.items}>
-          {interests.map((item) => (
+          {interests?.map((item) => (
             <div key={item.id} className={styles.item}>
               <p className={styles.writerName}>{item.name}</p>
             </div>
