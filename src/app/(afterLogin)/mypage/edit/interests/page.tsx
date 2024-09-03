@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getInterests } from "../_lib/getInterests";
+import { getInterests } from "../../../_lib/getInterests";
 import { putInterests } from "../_lib/putInterests";
 import { useRouter } from "next/navigation";
 import BackNav from "@/app/(beforeLogin)/_components/BackNav";
