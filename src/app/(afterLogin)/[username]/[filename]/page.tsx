@@ -8,6 +8,7 @@ import { putHeart } from "./_lib/putHeart";
 import { usePostIdStore } from "@/store/post";
 import { getDetail } from "./_lib/getDetail";
 import Header from "../../_components/Header";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface PostDetail {
   id: number;
@@ -28,6 +29,7 @@ export default function PostDetail() {
   const activePostId = usePostIdStore((state) => state.activePostId);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState<number | undefined>(0);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     async function fetchPostDetail() {
@@ -58,6 +60,7 @@ export default function PostDetail() {
       const data = await putHeart({ activePostId });
       setIsLiked(data.result.liked);
       setLikeCount(data.result.likeCount);
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     } catch (error) {
       console.error("Failed to update like status:", error);
     }
