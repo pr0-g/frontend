@@ -24,7 +24,6 @@ interface UserInfoRequest {
   name: string;
   nickname?: string;
   provider: string;
-  isLoggedIn: boolean;
   interests: Interest[];
 }
 
@@ -63,7 +62,7 @@ export default function Mypage() {
     <div className={styles.container}>
       <Header />
       <main className={styles.main}>
-        <UserGreeting userData={userData} />
+        <UserGreeting nickname={userData?.nickname} name={userData?.name} />
         <div className={styles.interests}>
           <SelectedInterests />
         </div>
