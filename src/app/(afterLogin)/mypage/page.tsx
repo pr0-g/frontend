@@ -12,6 +12,7 @@ import { useInterestsStore } from "@/store/interests";
 import { getUserInfo } from "./_lib/getUserInfo";
 import { getUserInterests } from "./_lib/getUserInterests";
 import Header from "../_components/Header";
+import { useUserDisplayNameStore } from "@/store/nickname";
 
 interface Interest {
   id: number;
@@ -42,6 +43,9 @@ const subscriptionItems = [
 export default function Mypage() {
   const [userData, setUserData] = useState<UserInfoRequest | null>(null);
   const setInterests = useInterestsStore((state) => state.setInterests);
+  const setDisplayName = useUserDisplayNameStore(
+    (state) => state.setDisplayName
+  );
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -50,6 +54,7 @@ export default function Mypage() {
         const userInterestsData = await getUserInterests();
         setUserData(userInfoData.result);
         setInterests(userInterestsData.result);
+        setDisplayName(userInfoData.result.nickname, userInfoData.result.name);
       } catch (err) {
         console.error("에러 발생:", err);
       }

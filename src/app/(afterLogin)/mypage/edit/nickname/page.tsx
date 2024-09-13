@@ -5,12 +5,14 @@ import styles from "./nickname.module.css";
 import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 import { useRouter } from "next/navigation";
 import { putNickname } from "../_lib/putNickname";
+import { useUserDisplayNameStore } from "@/store/nickname";
 
 export default function NickNameMain() {
   const router = useRouter();
   const [nickname, setNickname] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const displayName = useUserDisplayNameStore((state) => state.displayName);
 
   const handleSubmit = async () => {
     if (!nickname) {
@@ -47,7 +49,7 @@ export default function NickNameMain() {
           <div className={styles.nickname}>
             <input
               type="text"
-              placeholder="닉네임을 설정해주세요"
+              placeholder={displayName}
               className={styles.input}
               value={nickname}
               onChange={(e) => setNickname(e.target.value)}
