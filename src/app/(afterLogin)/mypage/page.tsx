@@ -13,6 +13,8 @@ import { getUserInfo } from "./_lib/getUserInfo";
 import { getUserInterests } from "./_lib/getUserInterests";
 import Header from "../_components/Header";
 import { useUserDisplayNameStore } from "@/store/nickname";
+import { useRouter } from "next/navigation";
+import { deleteMember } from "./_lib/deleteMember";
 
 interface Interest {
   id: number;
@@ -46,6 +48,7 @@ export default function Mypage() {
   const setDisplayName = useUserDisplayNameStore(
     (state) => state.setDisplayName
   );
+  const router = useRouter();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -62,6 +65,25 @@ export default function Mypage() {
 
     fetchUserData();
   }, []);
+
+  const handleWithdraw = async () => {
+    if (
+      window.confirm(
+        "정말로 회원탈퇴를 진행하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+      )
+    ) {
+      try {
+        const response = await deleteMember();
+        if (response.code === "SUCCESS") {
+          alert("회원탈퇴가 완료되었습니다.");
+          router.push("/");
+        }
+      } catch (error) {
+        console.error("회원탈퇴 중 오류 발생:", error);
+        alert("회원탈퇴 처리 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      }
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -89,7 +111,7 @@ export default function Mypage() {
           <Chatbot />
         </div>
         <div className={styles.setting}>
-          <Setting />
+          <Setting onWithdraw={handleWithdraw} />
         </div>
       </main>
       <UnderNavigation />
