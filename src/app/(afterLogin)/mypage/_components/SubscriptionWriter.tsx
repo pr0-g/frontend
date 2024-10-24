@@ -5,17 +5,7 @@ import Slider from "react-slick";
 import styles from "./subscriptionWriter.module.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-interface WriterItem {
-  profileImage: string;
-  name: string;
-}
-
-interface Props {
-  subscriptionItems: WriterItem[];
-  title: string;
-  viewAllLink: string;
-}
+import { IWritersList } from "@/model/writer";
 
 function PrevArrow({ onClick }: { onClick?: () => void }) {
   return (
@@ -37,7 +27,7 @@ export default function SubscriptionWriter({
   subscriptionItems,
   title,
   viewAllLink,
-}: Props) {
+}: IWritersList) {
   const settings = {
     dots: false,
     infinite: false,

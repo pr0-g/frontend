@@ -15,20 +15,7 @@ import Header from "../_components/Header";
 import { useUserDisplayNameStore } from "@/store/nickname";
 import { useRouter } from "next/navigation";
 import { deleteMember } from "./_lib/deleteMember";
-
-interface Interest {
-  id: number;
-  name: string;
-}
-
-interface UserInfoRequest {
-  userId: number;
-  email: string;
-  name: string;
-  nickname?: string;
-  provider: string;
-  interests: Interest[];
-}
+import { IUserInfo } from "@/model/user";
 
 const subscriptionItems = [
   { profileImage: "", name: "작가1" },
@@ -43,7 +30,7 @@ const subscriptionItems = [
 ];
 
 export default function Mypage() {
-  const [userData, setUserData] = useState<UserInfoRequest | null>(null);
+  const [userData, setUserData] = useState<IUserInfo | null>(null);
   const setInterests = useInterestsStore((state) => state.setInterests);
   const setDisplayName = useUserDisplayNameStore(
     (state) => state.setDisplayName

@@ -3,18 +3,7 @@ import HeartIcon from "../../_components/HeartIcon";
 import styles from "./Post.module.css";
 import Image from "next/image";
 import { usePostIdStore } from "@/store/post";
-
-interface PostProps {
-  id: number;
-  title: string;
-  thumbnailUrl: string;
-  createdAt: string;
-  updatedAt: string | null;
-  interestId: number;
-  userId: number;
-  likeCount: number;
-  writerId: string;
-}
+import { IPost } from "@/model/post";
 
 export default function Post({
   id,
@@ -26,7 +15,7 @@ export default function Post({
   userId,
   likeCount,
   writerId,
-}: PostProps) {
+}: IPost) {
   const pathWriterId: string = writerId?.slice(9, -1);
   const setActivePostId = usePostIdStore((state) => state.setActivePostId);
 

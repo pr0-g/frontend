@@ -11,24 +11,13 @@ import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useTabStore } from "@/store/tab";
 import Header from "../_components/Header";
-
-interface Post {
-  id: number;
-  title: string;
-  thumbnailUrl: string;
-  createdAt: string;
-  updatedAt: string | null;
-  interestId: number;
-  userId: number;
-  likeCount: number;
-  writerId: string;
-}
+import { IPost } from "@/model/post";
 
 interface APIResponse {
   code: string;
   message: string;
   result: {
-    content: Post[];
+    content: IPost[];
     last: boolean;
     number: number;
     totalPages: number;

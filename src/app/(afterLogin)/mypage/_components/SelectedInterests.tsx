@@ -2,12 +2,6 @@ import React from "react";
 import styles from "./selectedInterests.module.css";
 import Link from "next/link";
 import { useInterestsStore } from "@/store/interests";
-// 실제 경로로 수정해주세요
-
-interface Interest {
-  id: number;
-  name: string;
-}
 
 export default function SelectedInterests() {
   const interests = useInterestsStore((state) => state.interests);

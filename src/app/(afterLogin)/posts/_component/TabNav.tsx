@@ -3,13 +3,9 @@
 import React from "react";
 import styles from "./tabNav.module.css";
 import { useTabStore } from "@/store/tab";
+import { ITab } from "@/model/tab";
 
-interface Tab {
-  label: string;
-  value: string;
-}
-
-const tabs: Tab[] = [
+const tabs: ITab[] = [
   { label: "트렌딩", value: "trending" },
   { label: "최신", value: "recent" },
   { label: "구독", value: "subscribed" },

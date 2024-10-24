@@ -1,15 +1,6 @@
+import { IProfilePost } from "@/model/profilePost";
 import styles from "./ProfilePost.module.css";
 import Image from "next/image";
-
-interface PostProps {
-  id: number;
-  title: string;
-  thumbnailUrl: string;
-  createdAt: string;
-  likeCount: number;
-  content?: string;
-  commentCount?: number;
-}
 
 export default function Post({
   id,
@@ -19,7 +10,7 @@ export default function Post({
   likeCount,
   content = "",
   commentCount = 0,
-}: PostProps) {
+}: IProfilePost) {
   return (
     <div className={styles.post}>
       <div className={styles.imageWrap}>

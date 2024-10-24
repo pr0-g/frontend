@@ -2,13 +2,9 @@
 
 import Link from "next/link";
 import styles from "./userGreeting.module.css";
+import { IUserGreeting } from "@/model/name";
 
-interface UserGreetingProps {
-  nickname?: string;
-  name?: string;
-}
-
-export default function UserGreeting({ nickname, name }: UserGreetingProps) {
+export default function UserGreeting({ nickname, name }: IUserGreeting) {
   return (
     <div className={styles.myInfo}>
       <div>

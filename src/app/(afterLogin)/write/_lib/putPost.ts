@@ -1,14 +1,7 @@
 import api from "@/app/_lib/api";
+import { IWrite } from "@/model/write";
 
-interface PostData {
-  id: number | null;
-  title: string;
-  content: string;
-  interestId: number;
-  thumbnailUrl: string;
-}
-
-export async function putPost(postData: PostData) {
+export async function putPost(postData: IWrite) {
   const res = await fetch(`${api}/api/posts/edit`, {
     method: "PUT",
     credentials: "include",

@@ -9,26 +9,10 @@ import { getDetail } from "./_lib/getDetail";
 import Header from "../../_components/Header";
 import { useQueryClient } from "@tanstack/react-query";
 import LikeButton from "./_components/LikeButton";
-
-interface PostDetail {
-  id: number;
-  title: string;
-  content: string;
-  writerId: number;
-  writerNickname: string;
-  createdAt: string;
-  updatedAt: string;
-  interest: {
-    id: number;
-    name: string;
-  };
-  likeCount: number;
-  thumbnailUrl: string;
-  userLiked: boolean;
-}
+import { IPostDetail } from "@/model/postDetail";
 
 export default function PostDetail() {
-  const [postDetail, setPostDetail] = useState<PostDetail | null>(null);
+  const [postDetail, setPostDetail] = useState<IPostDetail | null>(null);
   const activePostId = usePostIdStore((state) => state.activePostId);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState<number>(0);

@@ -10,37 +10,26 @@ import "react-quill/dist/quill.core.css";
 import "react-quill/dist/quill.snow.css";
 import { getInterests } from "../_lib/getInterests";
 import Header from "../_components/Header";
+import { IInterest } from "@/model/interest";
+import { IWrite } from "@/model/write";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-
-interface Post {
-  id: number | null;
-  title: string;
-  content: string;
-  interestId: number;
-  thumbnailUrl: string;
-}
-
-interface Interest {
-  id: number;
-  name: string;
-}
 
 interface ApiResponse {
   code: string;
   message: string;
-  result: Interest[];
+  result: IInterest[];
 }
 
 export default function Editor() {
-  const [post, setPost] = useState<Post>({
+  const [post, setPost] = useState<IWrite>({
     id: null,
     title: "",
     content: "",
     interestId: 1,
     thumbnailUrl: "",
   });
-  const [interests, setInterests] = useState<Interest[]>([]);
+  const [interests, setInterests] = useState<IInterest[]>([]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   useEffect(() => {

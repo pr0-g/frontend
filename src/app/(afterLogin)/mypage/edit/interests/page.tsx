@@ -7,16 +7,17 @@ import { useRouter } from "next/navigation";
 import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 import styles from "./interests.module.css";
 import { useInterestsStore } from "@/store/interests";
+import { IInterest } from "@/model/interest";
 
 interface Interest {
   id: number;
   name: string;
 }
 
-interface ApiResponse {
+export interface ApiResponse {
   code: string;
   message: string;
-  result: Interest[];
+  result: IInterest[];
 }
 
 export default function Interests() {

@@ -1,11 +1,7 @@
+import { IsSava } from "@/model/save";
 import styles from "./saveItem.module.css";
 
-interface SavaItemProps {
-  title: string;
-  date: string;
-}
-
-export default function SaveItem({ title, date }: SavaItemProps) {
+export default function SaveItem({ title, date }: IsSava) {
   return (
     <div className={styles.item}>
       <h3 className={styles.title}>{title}</h3>

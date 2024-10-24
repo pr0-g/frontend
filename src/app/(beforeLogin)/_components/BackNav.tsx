@@ -1,13 +1,13 @@
 "use client";
 
 import BackIcon from "./BackIcon";
-import styles from "./BackNav.module.css"; // 스타일을 적용할 CSS 모듈을 가져옵니다.
+import styles from "./BackNav.module.css";
 
-interface Props {
+interface InavbarTitle {
   navbarTitle: string;
 }
 
-export default function BackNav({ navbarTitle }: Props) {
+export default function BackNav({ navbarTitle }: InavbarTitle) {
   return (
     <nav className={styles.navbar}>
       <div className={styles.backBtn}>
