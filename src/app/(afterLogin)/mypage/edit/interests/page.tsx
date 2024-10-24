@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { getInterests } from "../../../_lib/getInterests";
 import { putInterests } from "../_lib/putInterests";
 import { useRouter } from "next/navigation";
-import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 import styles from "./interests.module.css";
 import { useInterestsStore } from "@/store/interests";
 import { IInterest } from "@/model/interest";
+import BackNav from "@/app/(afterLogin)/_components/BackNav";
 
 interface Interest {
   id: number;

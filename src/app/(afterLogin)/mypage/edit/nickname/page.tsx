@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import styles from "./nickname.module.css";
-import BackNav from "@/app/(beforeLogin)/_components/BackNav";
 import { useRouter } from "next/navigation";
 import { putNickname } from "../_lib/putNickname";
 import { useUserDisplayNameStore } from "@/store/nickname";
+import BackNav from "@/app/(afterLogin)/_components/BackNav";
 
 export default function NickNameMain() {
   const router = useRouter();
