@@ -66,24 +66,30 @@
   font-size: 0.6rem;
   padding-bottom: 0.4rem;
 }
-
 .arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
-  background-color: #ffff;
-  border: 1px solid rgb(155, 132, 136);
-  color: rgb(161, 144, 147);
-  padding: 15px;
+  background-color: white;
+  color: #666;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.arrow:hover {
+  background-color: #f0f0f0;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .prevArrow {
@@ -92,6 +98,15 @@
 
 .nextArrow {
   right: -20px;
+}
+
+/* 화살표 컨테이너가 잘 보이도록 하기 위한 추가 스타일 */
+.itemsWrap {
+  display: block;
+  border: 2px solid #d9d9d9;
+  border-radius: 10px;
+  width: 100%;
+  padding: 1.5rem;
 }
 
 .itemsWrap :global(.slick-list) {
