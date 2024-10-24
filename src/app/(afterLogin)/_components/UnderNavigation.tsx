@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./underNavigation.module.css";
 import Link from "next/link";
