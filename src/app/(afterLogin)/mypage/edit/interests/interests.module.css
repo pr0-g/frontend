@@ -68,12 +68,12 @@
 }
 
 .interestItem.selected {
-  background-color: #87cefa; /* 하늘색 */
+  background-color: #b5e2fe; /* 하늘색 */
   color: white;
 }
 
 .interestItem.selected:hover {
-  background-color: #5cacee; /* 약간 더 진한 하늘색 */
+  background-color: #719ce1; /* 약간 더 진한 하늘색 */
 }
 
 .registerButton {
@@ -96,7 +96,7 @@
 }
 
 .registerButton:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #719ce1;
 }
 
 .registerButton:disabled {
