@@ -1,19 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import styles from "./write.module.css";
-import "react-quill/dist/quill.snow.css";
 import { putPost } from "./_lib/putPost";
-import "react-quill/dist/quill.core.css";
-import "react-quill/dist/quill.snow.css";
 import { getInterests } from "../_lib/getInterests";
 import Header from "../_components/Header";
 import { IInterest } from "@/model/interest";
 import { IWrite } from "@/model/write";
-
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import { useRouter } from "next/navigation";
 
 interface ApiResponse {
   code: string;
@@ -26,11 +21,12 @@ export default function Editor() {
     id: null,
     title: "",
     content: "",
-    interestId: 1,
+    interestId: 0,
     thumbnailUrl: "",
   });
   const [interests, setInterests] = useState<IInterest[]>([]);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchInterests = async () => {
@@ -51,8 +47,8 @@ export default function Editor() {
     setPost((prev) => ({ ...prev, title: e.target.value }));
   };
 
-  const handleContentChange = (content: string) => {
-    setPost((prev) => ({ ...prev, content }));
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPost((prev) => ({ ...prev, content: e.target.value }));
   };
 
   const handleInterestIdChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -76,6 +72,8 @@ export default function Editor() {
     try {
       const result = await putPost(post);
       console.log("Post updated successfully:", result);
+      router.refresh();
+      router.push("/posts");
     } catch (error) {
       console.error("Failed to update post:", error);
     }
@@ -99,7 +97,7 @@ export default function Editor() {
               onChange={handleInterestIdChange}
               className={styles.interestSelect}
             >
-              <option value="">관심사를 선택하세요</option>
+              <option value={0}>관심사를 선택하세요</option>
               {interests.map((interest) => (
                 <option key={interest.id} value={interest.id}>
                   {interest.name}
@@ -126,11 +124,13 @@ export default function Editor() {
               </div>
             )}
           </div>
-          <div className={styles.quillWrapper}>
-            <ReactQuill
-              theme="snow"
+          <div className={styles.contentWrapper}>
+            <textarea
               value={post.content}
               onChange={handleContentChange}
+              placeholder="내용을 입력하세요"
+              className={styles.contentTextarea}
+              rows={15}
             />
           </div>
           <div className={styles.submitButtonWrapper}>
