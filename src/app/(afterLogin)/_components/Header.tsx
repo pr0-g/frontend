@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./header.module.css";
 import { useTabStore } from "@/store/tab";
