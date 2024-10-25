@@ -3,9 +3,14 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const sessionId = request.cookies.get("JSESSIONID");
+  const { pathname } = request.nextUrl;
 
-  if (!sessionId) {
+  if (pathname !== "/" && !sessionId) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (pathname === "/" && sessionId) {
+    return NextResponse.redirect(new URL("/posts", request.url));
   }
 
   return NextResponse.next();
@@ -13,6 +18,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/",
     "/posts",
     "/mypage",
     "/mypage/edit/interests",
