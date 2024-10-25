@@ -3,11 +3,12 @@
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./underNavigation.module.css";
 import Link from "next/link";
+import { useUserDisplayEmailStore } from "@/store/email";
 
 export default function UnderNavigation() {
   const router = useRouter();
   const pathname = usePathname(); // 현재 경로를 가져오기 위해 usePathname 사용
-
+  const displayEmail = useUserDisplayEmailStore((state) => state.displayEmail);
   return (
     <div className={styles.container}>
       <div className={styles.navBar}>
@@ -41,10 +42,10 @@ export default function UnderNavigation() {
             </svg>
           </div>
         </Link>
-        <Link href="/mypage">
+        <Link href={`/${displayEmail}/posts`}>
           <div
             className={`${styles.navItem} ${
-              pathname === "/mypage" ? styles.active : ""
+              pathname === `/${displayEmail}/posts` ? styles.active : ""
             }`}
           >
             <svg
@@ -54,6 +55,94 @@ export default function UnderNavigation() {
             >
               <circle cx="8" cy="6" r="3.25" />
               <path d="m2.75 14.25c0-2.5 2-5 5.25-5s5.25 2.5 5.25 5" />
+            </svg>
+          </div>
+        </Link>
+        <Link href="/mypage">
+          <div
+            className={`${styles.navItem} ${
+              pathname === "/mypage" ? styles.active : ""
+            }`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="800px"
+              height="800px"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                cx="4"
+                cy="4"
+                r="1"
+                transform="rotate(90 4 4)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="12"
+                cy="4"
+                r="1"
+                transform="rotate(90 12 4)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="20"
+                cy="4"
+                r="1"
+                transform="rotate(90 20 4)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="4"
+                cy="12"
+                r="1"
+                transform="rotate(90 4 12)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="1"
+                transform="rotate(90 12 12)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="20"
+                cy="12"
+                r="1"
+                transform="rotate(90 20 12)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="4"
+                cy="20"
+                r="1"
+                transform="rotate(90 4 20)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="12"
+                cy="20"
+                r="1"
+                transform="rotate(90 12 20)"
+                stroke="#000000"
+                stroke-width="2"
+              />
+              <circle
+                cx="20"
+                cy="20"
+                r="1"
+                transform="rotate(90 20 20)"
+                stroke="#000000"
+                stroke-width="2"
+              />
             </svg>
           </div>
         </Link>

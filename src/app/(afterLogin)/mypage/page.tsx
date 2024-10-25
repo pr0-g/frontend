@@ -16,6 +16,7 @@ import { useUserDisplayNameStore } from "@/store/nickname";
 import { useRouter } from "next/navigation";
 import { deleteMember } from "./_lib/deleteMember";
 import { IUserInfo } from "@/model/user";
+import { useUserDisplayEmailStore } from "@/store/email";
 
 const subscriptionItems = [
   { profileImage: "", name: "작가1" },
@@ -35,6 +36,9 @@ export default function Mypage() {
   const setDisplayName = useUserDisplayNameStore(
     (state) => state.setDisplayName
   );
+  const setDisplayEmail = useUserDisplayEmailStore(
+    (state) => state.setDisplayEmail
+  );
   const router = useRouter();
 
   useEffect(() => {
@@ -45,6 +49,8 @@ export default function Mypage() {
         setUserData(userInfoData.result);
         setInterests(userInterestsData.result);
         setDisplayName(userInfoData.result.nickname, userInfoData.result.name);
+        const emailId = userInfoData.result.email.split("@")[0];
+        setDisplayEmail(emailId);
       } catch (err) {
         console.error("에러 발생:", err);
       }
