@@ -66,6 +66,11 @@ export default function PostDetail() {
         </div>
         <div className={styles.interestWrapper}>
           <span className={styles.interest}>{postDetail?.interest.name}</span>
+          <LikeButton
+            isLiked={isLiked}
+            likeCount={likeCount}
+            onClick={handleHeartClick}
+          />
         </div>
         <div className={styles.content}>
           <div className={styles.thumbnailImageWrapper}>
